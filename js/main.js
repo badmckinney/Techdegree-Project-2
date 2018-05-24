@@ -2,7 +2,6 @@
 const masterList = document.querySelector('.student-list');
 let students = document.querySelectorAll('student-item');
 let totalStudents = masterList.length;
-let anchors = document.getElementsByTagName('a');
 
 //populates page with a group of 10 students based on their respective page numbers
 function showPage(page, studentList) {
@@ -25,7 +24,9 @@ function appendPageLinks(studentList) {
     pagUL.innerHTML = '<li><a href="#" class="inactive">' + (i + 1) + '</a></li>';
   }
   pagUL.addEventListener("click", () => {
-
-
+    showPage(event.target.textContent, masterList);
+    event.target.className = "active";
   });
 }
+
+showPage();
