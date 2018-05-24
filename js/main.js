@@ -11,7 +11,7 @@ const pageDiv = document.querySelector('.page');
 function showPage(page, studentList) {
   masterList.hide();
   for (let i = 0; i < studentList.length; i += 1) {
-    if (i >= (page - 1) * 10 && <= (page * 10) - 1) {
+    if (i >= (page - 1) * 10 && i <= (page * 10) - 1) {
       studentList[i].show();
     }
   }
@@ -36,5 +36,4 @@ function appendPageLinks(studentlist) {
   });
 }
 
-appendPageLinks(masterList);
-showPage(1, masterList);
+appendPageLinks(students);
