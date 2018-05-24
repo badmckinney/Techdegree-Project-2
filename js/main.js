@@ -1,7 +1,10 @@
 //Variables for functions to reference
-const masterList = document.querySelector('.student-list');
-let students = document.querySelectorAll('student-item');
-let totalStudents = masterList.length;
+let masterList = document.querySelector('.student-list');
+let students = document.querySelectorAll('.student-item');
+let totalStudents;
+let pagLinks;
+let pagUL;
+let numberOfPages;
 
 //populates page with a group of 10 students based on their respective page numbers
 function showPage(page, studentList) {
@@ -15,11 +18,11 @@ function showPage(page, studentList) {
 
 //
 function appendPageLinks(studentList) {
-  const pagLinks = document.createElement('Div');
+  pagLinks = document.createElement('Div');
   pagLinks.className = 'pagLinks';
-  const pagUL = pagLinks.appendChild('ul');
+  pagUL = pagLinks.appendChild('ul');
   pagUL.setAttribute("id", "links");
-  let numberOfPages = Math.ceil(totalStudents / 10);
+  numberOfPages = Math.ceil(totalStudents / 10);
   for (let i = 0; i < numberOfPages; i += 1) {
     pagUL.innerHTML = '<li><a href="#" class="inactive">' + (i + 1) + '</a></li>';
   }
@@ -29,4 +32,5 @@ function appendPageLinks(studentList) {
   });
 }
 
-showPage();
+appendPageLinks(masterList);
+showPage(1, masterList);
