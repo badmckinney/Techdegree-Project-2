@@ -10,7 +10,9 @@ const pageDiv = document.querySelector('.page');
 
 //populates page with a group of 10 students based on their respective page numbers
 function showPage(page, studentList) {
-  studentList.style.display = "none";
+  for (let i = 0; i < studentList.length; i += 1) {
+    studentList[i].style.display = "none";
+  }
   for (let i = 0; i < studentList.length; i += 1) {
     if (i >= (page - 1) * 10 && i <= (page * 10) - 1) {
       studentList[i].style.display = "block";
@@ -31,7 +33,7 @@ function appendPageLinks(studentlist) {
     pagUL.innerHTML += '<li><a href="#" class="inactive">' + [i + 1] + '</a></li>';
   }
   pagUL.addEventListener("click", (e) => {
-    showPage(e.target.textContent, students);
+    showPage(e.target.textContent, studentList);
     for (i = 0; i < numberOfPages; i += 1) {
       anchors[i].className = "inactive";
     }
@@ -39,4 +41,6 @@ function appendPageLinks(studentlist) {
   });
 }
 
+showPage(1, students);
 appendPageLinks(students);
+anchors[0].className = "active";
