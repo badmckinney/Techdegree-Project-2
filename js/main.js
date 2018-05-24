@@ -1,10 +1,11 @@
 //Variables for functions to reference
 let masterList = document.querySelector('.student-list');
 let students = document.querySelectorAll('.student-item');
-let totalStudents;
+let totalStudents = students.length;
 let pagLinks;
 let pagUL;
 let numberOfPages;
+let anchors = document.getElementsByTagName('a');
 const pageDiv = document.querySelector('.page');
 
 //populates page with a group of 10 students based on their respective page numbers
@@ -19,7 +20,6 @@ function showPage(page, studentList) {
 
 //
 function appendPageLinks(studentlist) {
-  totalStudents = students.length
   numberOfPages = Math.ceil(totalStudents / 10);
   pagLinks = document.createElement('div');
   pagLinks.className = 'pagination';
@@ -30,9 +30,12 @@ function appendPageLinks(studentlist) {
   for (let i = 0; i < numberOfPages; i += 1) {
     pagUL.innerHTML += '<li><a href="#" class="inactive">' + [i + 1] + '</a></li>';
   }
-  pagUL.addEventListener("click", () => {
-    showPage(event.target.textContent, masterList);
-    event.target.className = "active";
+  pagUL.addEventListener("click", (e) => {
+    showPage(e.target.textContent, masterList);
+    for (i = 0; i < numberOfPages; i += 1) {
+      anchors[i].className = "inactive";
+    }
+    e.target.className = "active";
   });
 }
 
