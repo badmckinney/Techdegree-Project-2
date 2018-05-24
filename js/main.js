@@ -5,6 +5,7 @@ let totalStudents;
 let pagLinks;
 let pagUL;
 let numberOfPages;
+const pageDiv = document.querySelector('.page');
 
 //populates page with a group of 10 students based on their respective page numbers
 function showPage(page, studentList) {
@@ -17,12 +18,15 @@ function showPage(page, studentList) {
 }
 
 //
-function appendPageLinks(studentList) {
-  pagLinks = document.createElement('Div');
-  pagLinks.className = 'pagLinks';
-  pagUL = pagLinks.appendChild('ul');
-  pagUL.setAttribute("id", "links");
+function appendPageLinks(studentlist) {
+  totalStudents = studentList.length
   numberOfPages = Math.ceil(totalStudents / 10);
+  pagLinks = document.createElement('div');
+  pagLinks.className = 'pagLinks';
+  pagUL = document.createElement('ul');
+  pagUL.setAttribute("id", "links");
+  pageDiv.appendChild(pagLinks);
+  pagLinks.appendChild(pagUL);
   for (let i = 0; i < numberOfPages; i += 1) {
     pagUL.innerHTML = '<li><a href="#" class="inactive">' + (i + 1) + '</a></li>';
   }
