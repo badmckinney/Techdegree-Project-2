@@ -9,17 +9,17 @@ const pageDiv = document.querySelector('.page');
 
 //populates page with a group of 10 students based on their respective page numbers
 function showPage(page, studentList) {
-  masterList.hide();
+  masterList.style.display = "none";
   for (let i = 0; i < studentList.length; i += 1) {
     if (i >= (page - 1) * 10 && i <= (page * 10) - 1) {
-      studentList[i].show();
+      studentList[i].style.display = "block";
     }
   }
 }
 
 //
 function appendPageLinks(studentlist) {
-  totalStudents = studentList.length
+  totalStudents = students.length
   numberOfPages = Math.ceil(totalStudents / 10);
   pagLinks = document.createElement('div');
   pagLinks.className = 'pagLinks';
@@ -28,7 +28,7 @@ function appendPageLinks(studentlist) {
   pageDiv.appendChild(pagLinks);
   pagLinks.appendChild(pagUL);
   for (let i = 0; i < numberOfPages; i += 1) {
-    pagUL.innerHTML = '<li><a href="#" class="inactive">' + (i + 1) + '</a></li>';
+    pagUL.innerHTML += '<li><a href="#" class="inactive">' + [i + 1] + '</a></li>';
   }
   pagUL.addEventListener("click", () => {
     showPage(event.target.textContent, masterList);
