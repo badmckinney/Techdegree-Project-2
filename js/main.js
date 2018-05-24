@@ -22,7 +22,7 @@ function appendPageLinks(studentlist) {
   totalStudents = students.length
   numberOfPages = Math.ceil(totalStudents / 10);
   pagLinks = document.createElement('div');
-  pagLinks.className = 'pagLinks';
+  pagLinks.className = 'pagination';
   pagUL = document.createElement('ul');
   pagUL.setAttribute("id", "links");
   pageDiv.appendChild(pagLinks);
