@@ -8,6 +8,8 @@ let numberOfPages;
 let anchors = document.getElementsByTagName('a');
 const pageDiv = document.querySelector('.page');
 let searchBar;
+let searchResults;
+let searchButton;
 
 //populates page with a group of 10 students based on their respective page numbers
 function showPage(page, studentList) {
@@ -46,19 +48,31 @@ function createSearch() {
   searchBar = document.createElement('div');
   searchBar.className = 'student-search';
   let html = "";
-  html += '<input type="text" id="userInput" onkeyup="search()" placeholder="Search for students..."><button>Search</button>';
+  html += '<input type="text" id="userInput" placeholder="Search for students..."><button>Search</button>';
   searchBar.innerHTML = html;
   document.querySelector('.page-header').appendChild(searchBar);
+  searchBar.addEventListener("click", (e) => {
+    search();
+  });
 }
 
 function search() {
+  searchResults = [];
   filter = userInput.value.toUpperCase();
   for (i = 0; i < students.length; i += 1) {
     eachStudent = students[i].getElementsByTagName('h3')[0];
     if (eachStudent.innerHTML.toUpperCase().includes(filter)) {
       students[i].style.display = "block";
+      searchResults.push(students[i]);
     } else {
       students[i].style.display = "none";
+    }
+    if (searchResults.length !== 0) {
+      showPage(1, searchResults);
+      appendPageLinks(searchResults);
+      anchors[0].className = "active";
+    } else {
+      masterList.innerHTML = '<h4>No matches</h4>';
     }
   }
 }
