@@ -8,7 +8,7 @@ let numberOfPages;
 let anchors = document.getElementsByTagName('a');
 const pageDiv = document.querySelector('.page');
 let searchBar;
-let searchResults;
+let searchResults = [];
 let searchButton;
 
 //populates page with a group of 10 students based on their respective page numbers
@@ -48,36 +48,63 @@ function createSearch() {
   searchBar = document.createElement('div');
   searchBar.className = 'student-search';
   let html = "";
-  html += '<input type="text" id="userInput" placeholder="Search for students..."><button>Search</button>';
+  html += '<input type="text" onkeyup="search()" id="userInput" placeholder="Search for students..."><button id="searchButton">Search</button>';
   searchBar.innerHTML = html;
   document.querySelector('.page-header').appendChild(searchBar);
-  searchBar.addEventListener("click", (e) => {
-    search();
-  });
 }
 
+let noMatches = document.createElement('li');
+noMatches.innerHTML = 'No Matches Found.';
+masterList.appendChild('noMatches');
+noMatches.style.display = 'none';
+
 function search() {
-  searchResults = [];
+  let userInput = document.querySelector('input');
   filter = userInput.value.toUpperCase();
+  searchButton = document.getElementById('searchButton');
+  eachStudentName = document.querySelectorAll('h3');
+  eachStudentEmail = document.getElementsByClassName('email');
   for (i = 0; i < students.length; i += 1) {
-    eachStudent = students[i].getElementsByTagName('h3')[0];
-    if (eachStudent.innerHTML.toUpperCase().includes(filter)) {
-      students[i].style.display = "block";
-      searchResults.push(students[i]);
+    if (eachStudentName[i].innerHTML.toUpperCase.includes(filter) || eachStudentEmail[i].innerHTML.toUpperCase.includes(filter)) {
+      students[i].style.display = 'block';
     } else {
-      students[i].style.display = "none";
+      students[i].style.display = 'none';
     }
-    if (searchResults.length !== 0) {
-      showPage(1, searchResults);
-      appendPageLinks(searchResults);
-      anchors[0].className = "active";
-    } else {
-      masterList.innerHTML = '<h4>No matches</h4>';
+  }
+  if (students.length === 0) {
+    noMatches.style.display = 'block';
+  } else {
+    noMatches.style.display = 'none';
+  }
+  showPage(1, students);
+  appendPageLinks(students);
+  anchors[0].className = "active";
+}
+
+
+
+
+
+  searchButton.addEventListener("click", (e) => {
+    for (i = 0; i < students.length; i += 1) {
+
+      if (eachStudent.innerHTML.toUpperCase().includes(filter)) {
+        students[i].style.display = "block";
+        searchResults.push(students[i]);
+      } else {
+        students[i].style.display = "none";
+      }
+    }
+  });
+  if (searchResults.length == 0) {
+    masterList.innerHTML = '<h4>No matches</h4>';
+  } else {
+    showPage(1, searchResults);
+    appendPageLinks(searchResults);
+    anchors[0].className = "active";
     }
   }
 }
-
-
 
 createSearch();
 showPage(1, students);
