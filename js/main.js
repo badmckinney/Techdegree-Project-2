@@ -54,8 +54,7 @@ function appendPageLinks(studentList) {
 }
 
 
-
-
+/*
 //Creates the innerHTML of the search bar, adds it to the div, and appends it to the DOM
 function createSearch() {
   let html = "";
@@ -63,71 +62,11 @@ function createSearch() {
   searchBar.innerHTML = html;
   document.querySelector('.page-header').appendChild(searchBar);
 }
-
-
-
-
-//Creates a variable to hold a message if no students match user search input.
-//Programmed to be hidden by default
-/*let noMatches = document.createElement('li');
-noMatches.innerHTML = '<h4>No Matches Found.</h4>';
-masterList.appendChild(noMatches);
-noMatches.style.display = 'none';*/
-
-
-
-
-//Empties page links ul in preparation to update it based on search results list
-//Iterates through all the students and compares user input with each students name and email
-//If the students name OR email contains the value of user input, that students display is set to block and is pushed to a new array, else it is hidden
-//If there are no matches to user input, a message is displayed that says "No Matches."
-/*
-
-function search() {
-  pagUL.innerHTML = "";
-  let filter = document.querySelector('input').value;
-  eachStudentName = document.querySelectorAll('h3');
-  eachStudentEmail = document.getElementsByClassName('email');
-  for (i = 0; i < masterList.length; i += 1) {
-    if (eachStudentName[i].innerHTML.includes(filter) || eachStudentEmail[i].innerHTML.includes(filter)) {
-      masterList[i].style.display = 'block';
-      if (masterList[i] !== searchResults[i]) {
-        searchResults.push(masterList[i]);
-      }
-    } else {
-      masterList[i].style.display = 'none';
-    }
-  }
-  if (masterList.length === 0) {
-    noMatches.style.display = 'block';
-  } else {
-    noMatches.style.display = 'none';
-  }
-  showPage(1, searchResults);
-  appendPageLinks(searchResults);
-  anchors[0].className = "active";
-}
-
-*/
-
-
-//Event listener to handle when the search button is clicked.
-//Clears the searchResults student list
-//Runs search function
-/*
-
-searchBar.addEventListener("click", (e) => {
-  searchResults = [];
-  if (event.target.tagName === "button") {
-    search();
-  }
-});
-
 */
 
 
 //Initial page onload
-createSearch();
+//createSearch();
 showPage(1, students);
 appendPageLinks(students);
 anchors[0].className = "active";
